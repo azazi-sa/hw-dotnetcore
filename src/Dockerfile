@@ -3,7 +3,7 @@ FROM microsoft/dotnet
  
 # Copy our code from the "/src/MyWebApi" folder to the "/app" folder in our container
 WORKDIR /app
-COPY ./src/ .
+COPY ./ /app
  
 # Expose port 80 for the Web API traffic
 ENV ASPNETCORE_URLS http://+:80
