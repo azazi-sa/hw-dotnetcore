@@ -5,6 +5,8 @@ dotnet: 1.0.3
 dist: trusty
 services:
  - docker
+install:
+  - pip install awscli
 script:
  - dotnet clean src/src.csproj
  - dotnet restore src/src.csproj
@@ -14,9 +16,11 @@ script:
  - docker tag sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER` sameerazazi87/hw-dotnetcore:latest
  - echo "sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER`"
  - docker images
+ - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+ - docker push sameerazazi87/hw-dotnetcore
 
 after_success:
- - if [ "$TRAVIS_BRANCH" == "master" ]; then
-   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-   docker push sameerazazi87/hw-dotnetcore;
-   fi
+ - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+ - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+ - aws configure set default.region us-east-1
+ - aws elasticbeanstalk update-environment --application-name=hw-dotnetcore --environment-name=Custom-env --version-label=hw-dotnetcore-docker-v0.1
