@@ -10,5 +10,5 @@ script:
  - dotnet restore src/src.csproj
  - dotnet restore test/test.csproj
  - dotnet test test/test.csproj
- - docker build -t sameerazazi87/hw-helloworld:`echo $TRAVIS_BUILD_NUMBER` src/
+ - docker build -t sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER` src/
  - docker push sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER`
