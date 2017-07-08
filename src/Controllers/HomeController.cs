@@ -10,7 +10,7 @@ namespace src.Controllers
         [HttpGet]
         public string Get()
         {
-            return "hello world " + DateTime.Now.ToString();
+            return "[latest] hello world " + DateTime.Now.ToString();
         }
     }
 }
