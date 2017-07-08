@@ -13,4 +13,9 @@ script:
  - docker build -t sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER` src/
  - echo "sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER`"
  - docker images
- - docker push sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER`
+
+after_success:
+ - if [ "$TRAVIS_BRANCH" == "master" ]; then
+   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+   docker push sameerazazi87/hw-dotnetcore:`echo $TRAVIS_BUILD_NUMBER`;
+   fi
