@@ -3,9 +3,11 @@ solution: hw-dotnetcore.sln
 mono: none
 dotnet: 1.0.3
 dist: trusty
+services:
+ - docker
 script:
  - dotnet clean src/src.csproj
  - dotnet restore src/src.csproj
  - dotnet restore test/test.csproj
  - dotnet test test/test.csproj
- - dotnet publish -c Release src/src.csproj
+ - docker build -t hw-helloworld -f src/
