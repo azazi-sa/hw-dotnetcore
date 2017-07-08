@@ -1,0 +1,8 @@
+language: csharp
+mono: none
+dotnet: 1.0.3
+dist: trusty
+script:
+ - dotnet restore src/src.csproj
+ - dotnet restore test/test.csproj
+ - dotnet test test/test.csproj
